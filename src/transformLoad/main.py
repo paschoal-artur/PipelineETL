@@ -25,10 +25,10 @@ df['new_money'] = df['new_money'].astype(str).str.replace('.', '', regex = False
 df['reviews_amount'] = df['reviews_amount'].astype(str).str.replace('[\(\)]', '', regex = True)
 
 #Convert the Data 
-df['old_money'] = df['old_money'].astype(float).fillna('0')
-df['new_money'] = df['new_money'].astype(float).fillna('0')
-df['reviews_amount'] = df['reviews_amount'].astype(int).fillna('0')
-df['reviews_rating_number'] = df['reviews_rating_number'].astype(float).fillna('0')
+df['old_money'] = df['old_money'].astype(float)
+df['new_money'] = df['new_money'].astype(float)
+df['reviews_amount'] = df['reviews_amount'].astype(int)
+df['reviews_rating_number'] = df['reviews_rating_number'].astype(float)
 
 #Keep out the outliers, no notebooks are worth less than 1000 reais
 df = df [
@@ -40,9 +40,9 @@ df = df [
 
 #Conect to the database
 
-conn = sqlite3.connect('data/mercadolivre.sql')
+conn = sqlite3.connect('data/mercadolivre.db')
 
 #Save the dataframe in sqlite database
-df.to_sql('mercadolivre', conn, if_exists='replace', index = False)
+df.to_sql('notebooks', conn, if_exists='replace', index = False)
 
 conn.close()
